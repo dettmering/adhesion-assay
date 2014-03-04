@@ -22,6 +22,15 @@ ggplot(img, aes(x = Count_EC, y = Count_PBL)) +
   facet_grid(Metadata_Treatment ~ Metadata_Dose) +
   theme_bw()
 
+# DAPI intensity vs. PBL intensity (corresponds to flow cytometry measurement)
+
+ggplot(nuc, aes(x = log10(Intensity_MeanIntensity_DAPI), y = log10(Intensity_MeanIntensity_PBL))) +
+  geom_point(alpha = 0.2) +
+  xlab("DAPI intensity (AU)") +
+  ylab("CellTracker Green intensity (AU)") +
+  facet_grid(Metadata_Treatment ~ Metadata_Dose) +
+  theme_bw()
+
 # PBL/EC in %, ignores position of PBL
 
 ggplot(summary, aes(x = Metadata_Dose, y = img.PBL_EC_ratio.Mean * 100)) +
