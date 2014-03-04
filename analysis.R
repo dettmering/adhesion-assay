@@ -28,12 +28,13 @@ classifiers <- c(
 
 # Set columns of interest
 
-col <- c(
-  'Count_Cells',
-  'Count_EC',
-  'Count_PBL',
-  'PBL_EC_ratio',
-  'EC_per_cm2'
+col <- rbind(
+  c('Count_Cells', 'img'),
+  c('Count_EC', 'img'),
+  c('Count_PBL', 'img'),
+  c('PBL_EC_ratio', 'img'),
+  c('EC_per_cm2', 'img'),
+  c('Children_PBL_Count', 'cells')
 )
 
 # Variables
@@ -63,24 +64,26 @@ pbl[pbl[,'AreaShape_Area'] < median(pbl$AreaShape_Area) + sd(pbl$AreaShape_Area)
 summary <- generateList(cells, classifiers)
 
 i <- 0
-j <- NULL
+j <- 0
+k <- 0
 
 for (i in 1:length(summary$n)) {
-  cells.subset <- merge(cells, summary[i, classifiers])
-  img.subset <- merge(img, summary[i, classifiers])
+  for (k in unique(col[, 2])) { # generate subset dataframes
+    assign(paste0(k, '.subset'), merge(get(k), summary[i, classifiers]))
+  }
   
   summary[i, 'n_images'] <- length(img.subset$ImageNumber)
   
-  for (j in col) {
-    summary[i, paste0(j, '.Sum')] <- sum(img.subset[, j])
-    summary[i, paste0(j, '.Median')] <- median(img.subset[, j])
-    summary[i, paste0(j, '.Mean')] <- mean(img.subset[, j])
-    summary[i, paste0(j, '.SD')] <- sd(img.subset[, j])
+  for (j in 1:length(col[, 1])) {
+    summary[i, paste0(col[j, 2], '.', col[j, 1], '.Sum')] <- sum(get(paste0(col[j, 2], '.subset'))[, col[j, 1]])
+    summary[i, paste0(col[j, 2], '.', col[j, 1], '.Median')] <- median(get(paste0(col[j, 2], '.subset'))[, col[j, 1]])
+    summary[i, paste0(col[j, 2], '.', col[j, 1], '.Mean')] <- mean(get(paste0(col[j, 2], '.subset'))[, col[j, 1]])
+    summary[i, paste0(col[j, 2], '.', col[j, 1], '.SD')] <- sd(get(paste0(col[j, 2], '.subset'))[, col[j, 1]])
   }
 }
 
-summary$EC_per_dish.Mean <- summary$EC_per_cm2.Mean * Petridish_area_cm2
-summary$EC_per_dish.SD <- summary$EC_per_cm2.SD * Petridish_area_cm2
+summary$EC_per_dish.Mean <- summary$img.EC_per_cm2.Mean * Petridish_area_cm2
+summary$EC_per_dish.SD <- summary$img.EC_per_cm2.SD * Petridish_area_cm2
 
 # Export raw data and summary table to csv (working directory)
 
@@ -104,9 +107,9 @@ ggplot(cells, aes(x = Children_PBL_Count)) +
   geom_histogram() +
   facet_grid(Metadata_Treatment ~ Metadata_Dose)
 
-ggplot(summary, aes(x = Metadata_Dose, y = PBL_EC_ratio.Mean * 100)) +
+ggplot(summary, aes(x = Metadata_Dose, y = img.PBL_EC_ratio.Mean * 100)) +
   geom_bar(aes(fill = Metadata_Treatment), position = position_dodge(width = 0.9), stat="identity") +
-  geom_errorbar(aes(group = Metadata_Treatment, ymin = PBL_EC_ratio.Mean * 100 - PBL_EC_ratio.SD * 100, ymax = PBL_EC_ratio.Mean * 100 + PBL_EC_ratio.SD * 100), position = position_dodge(width = 0.9), width = 0.1) +
+  geom_errorbar(aes(group = Metadata_Treatment, ymin = img.PBL_EC_ratio.Mean * 100 - img.PBL_EC_ratio.SD * 100, ymax = img.PBL_EC_ratio.Mean * 100 + img.PBL_EC_ratio.SD * 100), position = position_dodge(width = 0.9), width = 0.1) +
   xlab("Dose (Gy)") +
   ylab("Mean number of PBL per EC (%)") +
   theme_bw()
