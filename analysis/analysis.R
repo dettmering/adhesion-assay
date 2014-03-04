@@ -52,6 +52,23 @@ img$Count_EC <- img$Count_Cells
 img$PBL_EC_ratio <- img$Count_PBL / img$Count_EC
 img$EC_per_cm2 <- img$Count_EC / Image_area_cm2
 
+# Classify PBL: Do they have a nucleus?
+
+getThreshold <- function(data, n.classes = 2) {
+  library(mritc)
+  
+  otsu <- initOtsu(data, n.classes - 1)
+  
+  threshold <- ((otsu$mu[2] - otsu$sigma[2] - otsu$sigma[1]) / 2) + otsu$mu[1]
+  
+  return(threshold)
+}
+
+threshold.DAPI <- getThreshold(pbl$Intensity_IntegratedIntensity_DAPI)
+
+pbl[,'has.nucleus'] <- pbl[, 'Intensity_IntegratedIntensity_DAPI'] <= threshold.DAPI
+pbl[,'has.nucleus'] <- pbl[, 'Intensity_IntegratedIntensity_DAPI'] > threshold.DAPI
+
 ##########################################################
 # Calculate percentage translocated and other parameters #
 ##########################################################
