@@ -52,11 +52,6 @@ img$Count_EC <- img$Count_Cells
 img$PBL_EC_ratio <- img$Count_PBL / img$Count_EC
 img$EC_per_cm2 <- img$Count_EC / Image_area_cm2
 
-# Classify PBL by size
-
-pbl[pbl[,'AreaShape_Area'] >= median(pbl$AreaShape_Area) + sd(pbl$AreaShape_Area), 'Size'] <- 'large'
-pbl[pbl[,'AreaShape_Area'] < median(pbl$AreaShape_Area) + sd(pbl$AreaShape_Area), 'Size'] <- 'small'
-
 ##########################################################
 # Calculate percentage translocated and other parameters #
 ##########################################################

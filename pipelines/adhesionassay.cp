@@ -101,7 +101,7 @@ IdentifyPrimaryObjects:[module_num:2|svn_version:\'10826\'|variable_revision_num
 IdentifyPrimaryObjects:[module_num:3|svn_version:\'10826\'|variable_revision_number:8|show_window:False|notes:\x5B\x5D]
     Select the input image:PBL
     Name the primary objects to be identified:PBL
-    Typical diameter of objects, in pixel units (Min,Max):1,30
+    Typical diameter of objects, in pixel units (Min,Max):8,30
     Discard objects outside the diameter range?:Yes
     Try to merge too small objects with nearby larger objects?:Yes
     Discard objects touching the border of the image?:No
@@ -111,7 +111,7 @@ IdentifyPrimaryObjects:[module_num:3|svn_version:\'10826\'|variable_revision_num
     Approximate fraction of image covered by objects?:0.01
     Method to distinguish clumped objects:Intensity
     Method to draw dividing lines between clumped objects:Intensity
-    Size of smoothing filter:8
+    Size of smoothing filter:15
     Suppress local maxima that are closer than this minimum allowed distance:7
     Speed up by using lower-resolution image to find local maxima?:Yes
     Name the outline image:PBLOutlines
