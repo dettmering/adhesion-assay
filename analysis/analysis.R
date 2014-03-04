@@ -114,14 +114,14 @@ ggplot(img, aes(x = Count_EC, y = Count_PBL)) +
 
 ggplot(summary, aes(x = Metadata_Dose, y = img.PBL_EC_ratio.Mean * 100)) +
   geom_bar(aes(fill = Metadata_Treatment), position = position_dodge(width = 0.9), stat="identity") +
-  geom_errorbar(aes(group = Metadata_Treatment, ymin = img.PBL_EC_ratio.Mean * 100 - img.PBL_EC_ratio.SD * 100, ymax = img.PBL_EC_ratio.Mean * 100 + img.PBL_EC_ratio.SD * 100), position = position_dodge(width = 0.9), width = 0.1) +
+  geom_errorbar(aes(group = Metadata_Treatment, ymin = img.PBL_EC_ratio.Mean * 100 - (img.PBL_EC_ratio.SD / sqrt(n_images) * 100), ymax = img.PBL_EC_ratio.Mean * 100 + (img.PBL_EC_ratio.SD / sqrt(n_images) * 100)), position = position_dodge(width = 0.9), width = 0.1) +
   xlab("Dose (Gy)") +
   ylab("Mean number of PBL per EC (%)") +
   theme_bw()
 
 ggplot(summary, aes(x = Metadata_Dose, y = img.Count_PBL.Mean)) +
   geom_bar(aes(fill = Metadata_Treatment), position = position_dodge(width = 0.9), stat="identity") +
-  geom_errorbar(aes(group = Metadata_Treatment, ymin = img.Count_PBL.Mean - (img.Count_PBL.SD / sqrt(n_images)), ymax = img.Count_PBL.Mean + img.Count_PBL.SD), position = position_dodge(width = 0.9), width = 0.1) +
+  geom_errorbar(aes(group = Metadata_Treatment, ymin = img.Count_PBL.Mean - (img.Count_PBL.SD / sqrt(n_images)), ymax = img.Count_PBL.Mean + (img.Count_PBL.SD / sqrt(n_images))), position = position_dodge(width = 0.9), width = 0.1) +
   xlab("Dose (Gy)") +
   ylab("Mean number of PBL per image") +
   theme_bw()
