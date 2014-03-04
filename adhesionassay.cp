@@ -173,6 +173,7 @@ MeasureObjectIntensity:[module_num:6|svn_version:\'10816\'|variable_revision_num
     Select an image to measure:PBL
     Select objects to measure:Cells
     Select objects to measure:Nuclei
+    Select objects to measure:PBL
 
 MeasureObjectSizeShape:[module_num:7|svn_version:\'1\'|variable_revision_number:1|show_window:False|notes:\x5B\x5D]
     Select objects to measure:Nuclei
