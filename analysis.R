@@ -48,7 +48,7 @@ Image_area_cm2 <- width.um * height.um / 10^8
 Pixel_area_um2 <- (width.um * height.um) / (width.px * height.px)
 Petridish_area_cm2 <- 9.621128 # (3.5/2)^2 * pi
 
-img$Count_EC <- img$Count_Cells - img$Count_PBL
+img$Count_EC <- img$Count_Cells
 img$PBL_EC_ratio <- img$Count_PBL / img$Count_EC
 img$EC_per_cm2 <- img$Count_EC / Image_area_cm2
 
