@@ -69,9 +69,9 @@ threshold.DAPI <- getThreshold(pbl$Intensity_IntegratedIntensity_DAPI)
 pbl[,'has.nucleus'] <- pbl[, 'Intensity_IntegratedIntensity_DAPI'] <= threshold.DAPI
 pbl[,'has.nucleus'] <- pbl[, 'Intensity_IntegratedIntensity_DAPI'] > threshold.DAPI
 
-##########################################################
-# Calculate percentage translocated and other parameters #
-##########################################################
+#####################
+# Calculate results #
+#####################
 
 summary <- generateList(cells, classifiers)
 
