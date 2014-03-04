@@ -84,6 +84,8 @@ for (i in 1:length(summary$n)) {
 
 summary$EC_per_dish.Mean <- summary$img.EC_per_cm2.Mean * Petridish_area_cm2
 summary$EC_per_dish.SD <- summary$img.EC_per_cm2.SD * Petridish_area_cm2
+summary$EC_per_dish.SEM <- summary$EC_per_dish.SD / sqrt(summary$n_images)
+summary$EC_per_dish.SEM.Percent <- summary$EC_per_dish.SEM / summary$EC_per_dish.Mean * 100
 
 # Export raw data and summary table to csv (working directory)
 
@@ -112,6 +114,7 @@ ggplot(img, aes(x = Count_EC, y = Count_PBL)) +
   geom_point() +
   xlab("EC Count") +
   ylab("PBL Count") +
+  facet_grid(Metadata_Treatment ~ Metadata_Dose) +
   theme_bw()
 
 ggplot(summary, aes(x = Metadata_Dose, y = img.PBL_EC_ratio.Mean * 100)) +
@@ -130,7 +133,7 @@ ggplot(summary, aes(x = Metadata_Dose, y = img.Count_PBL.Mean)) +
 
 ggplot(summary, aes(x = Metadata_Dose, y = EC_per_dish.Mean)) +
   geom_bar(aes(fill = Metadata_Treatment), position = position_dodge(width = 0.9), stat="identity") +
-  geom_errorbar(aes(group = Metadata_Treatment, ymin = EC_per_dish.Mean - EC_per_dish.SD, ymax = EC_per_dish.Mean + EC_per_dish.SD), position = position_dodge(width = 0.9), width = 0.1) +
+  geom_errorbar(aes(group = Metadata_Treatment, ymin = EC_per_dish.Mean - EC_per_dish.SEM, ymax = EC_per_dish.Mean + EC_per_dish.SEM), position = position_dodge(width = 0.9), width = 0.1) +
   xlab("Dose (Gy)") +
   ylab("Mean number of EC per petri dish") +
   theme_bw()
