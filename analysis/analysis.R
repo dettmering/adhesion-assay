@@ -6,10 +6,10 @@
 
 # Read CellProfiler results
 
-img <- read.csv("DefaultOUT_Image.csv")
-cells <- read.csv("DefaultOUT_Cells.csv")
-nuc <- read.csv("DefaultOUT_Nuclei.csv")
-pbl <- read.csv("DefaultOUT_PBL.csv")
+img <- read.csv("Image.csv")
+cells <- read.csv("Cells.csv")
+nuc <- read.csv("Nuclei.csv")
+pbl <- read.csv("PBL.csv")
 
 # Load sources
 
