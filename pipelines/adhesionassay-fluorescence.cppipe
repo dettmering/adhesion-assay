@@ -1,6 +1,6 @@
 CellProfiler Pipeline: http://www.cellprofiler.org
 Version:3
-DateRevision:20140124145122
+DateRevision:20140124151645
 GitHash:0c7fb94
 ModuleCount:16
 HasImagePlaneDetails:False
@@ -48,7 +48,7 @@ NamesAndTypes:[module_num:3|svn_version:\'Unknown\'|variable_revision_number:5|s
     Select the image type:Grayscale image
     Name to assign these images:DNA
     Match metadata:\x5B{\'DAPI\'\x3A \'Replicate\', \'PBL\'\x3A \'Replicate\', \'Phalloidin\'\x3A \'Replicate\'}, {\'DAPI\'\x3A \'Dose\', \'PBL\'\x3A \'Dose\', \'Phalloidin\'\x3A \'Dose\'}, {\'DAPI\'\x3A \'Celltype\', \'PBL\'\x3A \'Celltype\', \'Phalloidin\'\x3A \'Celltype\'}, {\'DAPI\'\x3A \'Treatment\', \'PBL\'\x3A \'Treatment\', \'Phalloidin\'\x3A \'Treatment\'}, {\'DAPI\'\x3A \'Time\', \'PBL\'\x3A \'Time\', \'Phalloidin\'\x3A \'Time\'}\x5D
-    Image set matching method:Metadata
+    Image set matching method:Order
     Set intensity range from:Image metadata
     Assignments count:3
     Single images count:0
@@ -56,21 +56,21 @@ NamesAndTypes:[module_num:3|svn_version:\'Unknown\'|variable_revision_number:5|s
     Name to assign these images:Phalloidin
     Name to assign these objects:Cell
     Select the image type:Grayscale image
-    Set intensity range from:Image metadata
+    Set intensity range from:Image bit-depth
     Retain outlines of loaded objects?:No
     Name the outline image:LoadedOutlines
     Select the rule criteria:and (file does contain "_0002.tif")
     Name to assign these images:DAPI
     Name to assign these objects:Nucleus
     Select the image type:Grayscale image
-    Set intensity range from:Image metadata
+    Set intensity range from:Image bit-depth
     Retain outlines of loaded objects?:No
     Name the outline image:LoadedOutlines
     Select the rule criteria:and (file does contain "_0000.tif")
     Name to assign these images:PBL
     Name to assign these objects:Cytoplasm
     Select the image type:Grayscale image
-    Set intensity range from:Image metadata
+    Set intensity range from:Image bit-depth
     Retain outlines of loaded objects?:No
     Name the outline image:LoadedOutlines
 
