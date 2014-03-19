@@ -22,8 +22,8 @@ m$Auto_PercentPositive <- m$Auto_Count_PBL / m$Auto_Count_Nuclei * 100
 m$Ratio_Nuclei <- m$Auto_Count_Nuclei / m$Manual_Count_Nuclei
 m$Difference_Nuclei <- m$Auto_Count_Nuclei - m$Manual_Count_Nuclei
 
-m$Ratio_MP <- m$Auto_Count_PBL / m$Manual_Count_PBL
-m$Difference_MP <- m$Auto_Count_PBL - m$Manual_Count_PBL
+m$Ratio_PBL <- m$Auto_Count_PBL / m$Manual_Count_PBL
+m$Difference_PBL <- m$Auto_Count_PBL - m$Manual_Count_PBL
 
 # Compare end point: Percent Macrophages
 
@@ -33,15 +33,15 @@ m$Difference_Percentage <- m$Auto_PercentPositive - m$Manual_PercentPositive
 # Plot results
 
 boxplot(m$Ratio_Nuclei ~ m$Morphology, ylab = "Nuclei Count")
-boxplot(m$Ratio_MP ~ m$Morphology, ylab = "PBL Count")
+boxplot(m$Ratio_PBL ~ m$Morphology, ylab = "PBL Count")
 boxplot(m$Ratio_Percentage ~ m$Morphology, ylab = "Percent Macrophages")
 
 wilcox.test(m$Ratio_Nuclei ~ m$Morphology)
-wilcox.test(m$Ratio_MP ~ m$Morphology)
+wilcox.test(m$Ratio_PBL ~ m$Morphology)
 wilcox.test(m$Ratio_Percentage ~ m$Morphology)
 
 # Print values
 
 message(paste(mean(m$Ratio_Nuclei), '+/-' , sd(m$Ratio_Nuclei), 'Nuclei'))
-message(paste(mean(m$Ratio_MP), '+/-' , sd(m$Ratio_MP), 'Macrophages'))
+message(paste(mean(m$Ratio_PBL), '+/-' , sd(m$Ratio_PBL), 'PBL'))
 message(paste(mean(m$Ratio_Percentage), '+/-' , sd(m$Ratio_Percentage), 'Percent positive'))
