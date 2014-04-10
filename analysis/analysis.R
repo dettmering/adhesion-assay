@@ -52,23 +52,6 @@ img$Count_EC <- img$Count_Cells
 img$PBL_EC_ratio <- img$Count_PBL / img$Count_EC
 img$EC_per_cm2 <- img$Count_EC / Image_area_cm2
 
-# Classify PBL: Do they have a nucleus?
-
-getThreshold <- function(data, n.classes = 2) {
-  library(mritc)
-  
-  otsu <- initOtsu(data, n.classes - 1)
-  
-  threshold <- ((otsu$mu[2] - otsu$sigma[2] - otsu$sigma[1]) / 2) + otsu$mu[1]
-  
-  return(threshold)
-}
-
-threshold.DAPI <- getThreshold(pbl$Intensity_IntegratedIntensity_DAPI)
-
-pbl[,'has.nucleus'] <- pbl[, 'Intensity_IntegratedIntensity_DAPI'] <= threshold.DAPI
-pbl[,'has.nucleus'] <- pbl[, 'Intensity_IntegratedIntensity_DAPI'] > threshold.DAPI
-
 #####################
 # Calculate results #
 #####################
@@ -102,7 +85,7 @@ summary$EC_per_dish.SEM.Percent <- summary$EC_per_dish.SEM / summary$EC_per_dish
 # Export raw data and summary table to csv (working directory)
 
 write.csv(img, paste0(format(Sys.time(), "%Y-%m-%d"), "_rawdata-img.csv"), row.names = F)
-write.csv(cells, paste0(format(Sys.time(), "%Y-%m-%d"), "_rawdata.csv"), row.names = F)
+if (length(cells$Metadata_Dose) < 50000) write.csv(cells, paste0(format(Sys.time(), "%Y-%m-%d"), "_rawdata.csv"), row.names = F)
 write.csv(summary, paste0(format(Sys.time(), "%Y-%m-%d"), "_results.csv"), row.names = F)
 
 # remove temporary variables
