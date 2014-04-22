@@ -2,7 +2,7 @@ CellProfiler Pipeline: http://www.cellprofiler.org
 Version:3
 DateRevision:20140124151645
 GitHash:0c7fb94
-ModuleCount:18
+ModuleCount:17
 HasImagePlaneDetails:False
 
 Images:[module_num:1|svn_version:\'Unknown\'|variable_revision_number:2|show_window:False|notes:\x5B\'To begin creating your project, use the Images module to compile a list of files and/or folders that you want to analyze. You can also specify a set of rules to include only the desired files in your selected folders.\', \'---\', \'Settings converted from legacy pipeline.\'\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
@@ -120,22 +120,10 @@ IdentifyPrimaryObjects:[module_num:5|svn_version:\'Unknown\'|variable_revision_n
     Method to calculate adaptive window size:Image size
     Size of adaptive window:10
 
-EnhanceOrSuppressFeatures:[module_num:6|svn_version:\'Unknown\'|variable_revision_number:4|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
+IdentifyPrimaryObjects:[module_num:6|svn_version:\'Unknown\'|variable_revision_number:10|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
     Select the input image:PBL
-    Name the output image:EnhancePBL
-    Select the operation:Enhance
-    Feature size:10
-    Feature type:Speckles
-    Range of hole sizes:8,10
-    Smoothing scale:2.0
-    Shear angle:0.0
-    Decay:0.95
-    Enhancement method:Tubeness
-
-IdentifyPrimaryObjects:[module_num:7|svn_version:\'Unknown\'|variable_revision_number:10|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
-    Select the input image:EnhancePBL
     Name the primary objects to be identified:PBL
-    Typical diameter of objects, in pixel units (Min,Max):5,15
+    Typical diameter of objects, in pixel units (Min,Max):10,30
     Discard objects outside the diameter range?:Yes
     Try to merge too small objects with nearby larger objects?:Yes
     Discard objects touching the border of the image?:No
@@ -173,7 +161,7 @@ IdentifyPrimaryObjects:[module_num:7|svn_version:\'Unknown\'|variable_revision_n
     Method to calculate adaptive window size:Image size
     Size of adaptive window:10
 
-IdentifySecondaryObjects:[module_num:8|svn_version:\'Unknown\'|variable_revision_number:9|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
+IdentifySecondaryObjects:[module_num:7|svn_version:\'Unknown\'|variable_revision_number:9|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
     Select the input objects:Nuclei
     Name the objects to be identified:Cells
     Select the method to identify the secondary objects:Propagation
@@ -206,7 +194,7 @@ IdentifySecondaryObjects:[module_num:8|svn_version:\'Unknown\'|variable_revision
     Method to calculate adaptive window size:Image size
     Size of adaptive window:10
 
-RelateObjects:[module_num:9|svn_version:\'Unknown\'|variable_revision_number:2|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
+RelateObjects:[module_num:8|svn_version:\'Unknown\'|variable_revision_number:2|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
     Select the input child objects:PBL
     Select the input parent objects:Cells
     Calculate child-parent distances?:Both
@@ -214,7 +202,7 @@ RelateObjects:[module_num:9|svn_version:\'Unknown\'|variable_revision_number:2|s
     Calculate distances to other parents?:No
     Parent name:None
 
-MeasureObjectIntensity:[module_num:10|svn_version:\'Unknown\'|variable_revision_number:3|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
+MeasureObjectIntensity:[module_num:9|svn_version:\'Unknown\'|variable_revision_number:3|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
     Hidden:3
     Select an image to measure:DAPI
     Select an image to measure:Phalloidin
@@ -223,13 +211,13 @@ MeasureObjectIntensity:[module_num:10|svn_version:\'Unknown\'|variable_revision_
     Select objects to measure:Nuclei
     Select objects to measure:PBL
 
-MeasureObjectSizeShape:[module_num:11|svn_version:\'Unknown\'|variable_revision_number:1|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
+MeasureObjectSizeShape:[module_num:10|svn_version:\'Unknown\'|variable_revision_number:1|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
     Select objects to measure:Nuclei
     Select objects to measure:Cells
     Select objects to measure:PBL
     Calculate the Zernike features?:No
 
-MaskImage:[module_num:12|svn_version:\'Unknown\'|variable_revision_number:3|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
+MaskImage:[module_num:11|svn_version:\'Unknown\'|variable_revision_number:3|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
     Select the input image:Phalloidin
     Name the output image:MaskBackground
     Use objects or an image as a mask?:Objects
@@ -237,12 +225,12 @@ MaskImage:[module_num:12|svn_version:\'Unknown\'|variable_revision_number:3|show
     Select image for mask:None
     Invert the mask?:Yes
 
-MeasureImageIntensity:[module_num:13|svn_version:\'Unknown\'|variable_revision_number:2|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
+MeasureImageIntensity:[module_num:12|svn_version:\'Unknown\'|variable_revision_number:2|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
     Select the image to measure:MaskBackground
     Measure the intensity only from areas enclosed by objects?:No
     Select the input objects:None
 
-GrayToColor:[module_num:14|svn_version:\'Unknown\'|variable_revision_number:2|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
+GrayToColor:[module_num:13|svn_version:\'Unknown\'|variable_revision_number:2|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
     Select a color scheme:RGB
     Select the image to be colored red:Phalloidin
     Select the image to be colored green:PBL
@@ -261,7 +249,7 @@ GrayToColor:[module_num:14|svn_version:\'Unknown\'|variable_revision_number:2|sh
     Relative weight for the brightness image:1
     Select the input image to add to the stacked image:None
 
-OverlayOutlines:[module_num:15|svn_version:\'Unknown\'|variable_revision_number:2|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
+OverlayOutlines:[module_num:14|svn_version:\'Unknown\'|variable_revision_number:2|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
     Display outlines on a blank image?:No
     Select image on which to display outlines:ColorImage
     Name the output image:OrigOverlay
@@ -275,7 +263,7 @@ OverlayOutlines:[module_num:15|svn_version:\'Unknown\'|variable_revision_number:
     Select outlines to display:PBLOutlines
     Select outline color:White
 
-SaveImages:[module_num:16|svn_version:\'Unknown\'|variable_revision_number:10|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
+SaveImages:[module_num:15|svn_version:\'Unknown\'|variable_revision_number:10|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
     Select the type of image to save:Image
     Select the image to save:OrigOverlay
     Select the objects to save:None
@@ -298,7 +286,7 @@ SaveImages:[module_num:16|svn_version:\'Unknown\'|variable_revision_number:10|sh
     Create subfolders in the output folder?:No
     Base image folder:Elsewhere...\x7C/Users/tdettmer
 
-SaveImages:[module_num:17|svn_version:\'Unknown\'|variable_revision_number:10|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
+SaveImages:[module_num:16|svn_version:\'Unknown\'|variable_revision_number:10|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
     Select the type of image to save:Image
     Select the image to save:ColorImage
     Select the objects to save:None
@@ -321,7 +309,7 @@ SaveImages:[module_num:17|svn_version:\'Unknown\'|variable_revision_number:10|sh
     Create subfolders in the output folder?:No
     Base image folder:Elsewhere...\x7C/Users/tdettmer
 
-ExportToSpreadsheet:[module_num:18|svn_version:\'Unknown\'|variable_revision_number:9|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
+ExportToSpreadsheet:[module_num:17|svn_version:\'Unknown\'|variable_revision_number:9|show_window:False|notes:\x5B\x5D|batch_state:array(\x5B\x5D, dtype=uint8)|enabled:True]
     Select the column delimiter:Comma (",")
     Add image metadata columns to your object data file?:Yes
     Limit output to a size that is allowed in Excel?:No
