@@ -27,15 +27,15 @@ ggplot(img, aes(x = Count_EC, y = Count_PBL)) +
   facet_grid(Metadata_Treatment ~ Metadata_Dose) +
   theme_bw()
 
-# DAPI intensity vs. PBL intensity (corresponds to flow cytometry measurement)
-
-ggplot(nuc, aes(x = log10(Intensity_MeanIntensity_DAPI), y = log10(Intensity_MeanIntensity_PBL))) +
-  geom_point(aes(color = Metadata_Time), alpha = 0.2) +
-  scale_color_discrete(name = "Time") +
-  xlab("DAPI intensity (AU)") +
-  ylab("CellTracker Green intensity (AU)") +
-  facet_grid(Metadata_Treatment ~ Metadata_Dose) +
-  theme_bw()
+# # DAPI intensity vs. PBL intensity (corresponds to flow cytometry measurement)
+# 
+# ggplot(nuc, aes(x = log10(Intensity_MeanIntensity_DAPI), y = log10(Intensity_MeanIntensity_PBL))) +
+#   geom_point(aes(color = Metadata_Time), alpha = 0.2) +
+#   scale_color_discrete(name = "Time") +
+#   xlab("DAPI intensity (AU)") +
+#   ylab("CellTracker Green intensity (AU)") +
+#   facet_grid(Metadata_Treatment ~ Metadata_Dose) +
+#   theme_bw()
 
 # PBL/EC in %, ignores position of PBL
 
@@ -44,7 +44,7 @@ ggplot(summary, aes(x = Metadata_Dose, y = img.PBL_EC_ratio.Mean * 100)) +
   geom_errorbar(aes(group = Metadata_Treatment, ymin = img.PBL_EC_ratio.Mean * 100 - (img.PBL_EC_ratio.SD / sqrt(n_images) * 100), ymax = img.PBL_EC_ratio.Mean * 100 + (img.PBL_EC_ratio.SD / sqrt(n_images) * 100)), position = position_dodge(width = 0.9), width = 0.1) +
   scale_fill_discrete(name = "Treatment") +
   xlab("Dose (Gy)") +
-  ylab("Mean number of PBL per EC (%)") +
+  ylab("Mean number of PBL per 100 EC") +
   facet_grid(. ~ Metadata_Time) +
   theme_bw()
 
@@ -53,6 +53,14 @@ ggplot(summary, aes(x = Metadata_Dose, y = img.PBL_EC_ratio.Mean * 100)) +
 ggplot(summary, aes(x = Metadata_Dose, y = img.Count_PBL.Mean)) +
   geom_bar(aes(fill = Metadata_Treatment), position = position_dodge(width = 0.9), stat="identity") +
   geom_errorbar(aes(group = Metadata_Treatment, ymin = img.Count_PBL.Mean - (img.Count_PBL.SD / sqrt(n_images)), ymax = img.Count_PBL.Mean + (img.Count_PBL.SD / sqrt(n_images))), position = position_dodge(width = 0.9), width = 0.1) +
+  scale_fill_discrete(name = "Treatment") +
+  xlab("Dose (Gy)") +
+  ylab("Mean number of PBL per image") +
+  facet_grid(. ~ Metadata_Time) +
+  theme_bw()
+
+ggplot(img, aes(x = Metadata_Dose, y = Count_PBL)) +
+  geom_boxplot(aes(fill = Metadata_Treatment), position = position_dodge(width = 0.9)) +
   scale_fill_discrete(name = "Treatment") +
   xlab("Dose (Gy)") +
   ylab("Mean number of PBL per image") +
