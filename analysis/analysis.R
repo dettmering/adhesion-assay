@@ -84,9 +84,11 @@ summary$EC_per_dish.SEM.Percent <- summary$EC_per_dish.SEM / summary$EC_per_dish
 
 # Export raw data and summary table to csv (working directory)
 
-write.csv(img, paste0(format(Sys.time(), "%Y-%m-%d"), "_rawdata-img.csv"), row.names = F)
-if (length(cells$Metadata_Dose) < 50000) write.csv(cells, paste0(format(Sys.time(), "%Y-%m-%d"), "_rawdata.csv"), row.names = F)
-write.csv(summary, paste0(format(Sys.time(), "%Y-%m-%d"), "_results.csv"), row.names = F)
+timestamp <- format(Sys.time(), "%Y-%m-%d")
+
+write.csv(img, paste0(timestamp, "_rawdata-img.csv"), row.names = F)
+if (length(cells$Metadata_Dose) < 50000) write.csv(cells, paste0(timestamp, "_rawdata.csv"), row.names = F)
+write.csv(summary, paste0(timestamp, "_results.csv"), row.names = F)
 
 # remove temporary variables
 
