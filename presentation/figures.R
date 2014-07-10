@@ -53,6 +53,7 @@ ggplot(summary, aes(x = Metadata_Dose, y = img.PBL_EC_ratio.Mean * 100)) +
 ggplot(summary, aes(x = Metadata_Dose, y = img.Count_PBL.Mean)) +
   geom_bar(aes(fill = Metadata_Treatment), position = position_dodge(width = 0.9), stat="identity") +
   geom_errorbar(aes(group = Metadata_Treatment, ymin = img.Count_PBL.Mean - (img.Count_PBL.SD / sqrt(n_images)), ymax = img.Count_PBL.Mean + (img.Count_PBL.SD / sqrt(n_images))), position = position_dodge(width = 0.9), width = 0.1) +
+  geom_text(aes(y = 0, label = n_images), size = 3, vjust = -1) +
   scale_fill_discrete(name = "Treatment") +
   xlab("Dose (Gy)") +
   ylab("Mean number of PBL per image") +
