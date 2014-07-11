@@ -10,13 +10,6 @@ library(ggplot2)
 
 pdf(paste0(format(Sys.time(), "%Y-%m-%d"), "_results.pdf"), width = 8.27, height = 5.83)
 
-# Histogram: PBLs per EC
-
-ggplot(cells, aes(x = Children_PBL_Count)) +
-  geom_histogram() +
-  xlab("No. of PBL per EC") +
-  facet_grid(Metadata_Treatment ~ Metadata_Dose)
-
 # EC count vs. PBL count for each image
 
 ggplot(img, aes(x = Count_EC, y = Count_PBL)) +
@@ -26,16 +19,6 @@ ggplot(img, aes(x = Count_EC, y = Count_PBL)) +
   ylab("PBL Count") +
   facet_grid(Metadata_Treatment ~ Metadata_Dose) +
   theme_bw()
-
-# # DAPI intensity vs. PBL intensity (corresponds to flow cytometry measurement)
-# 
-# ggplot(nuc, aes(x = log10(Intensity_MeanIntensity_DAPI), y = log10(Intensity_MeanIntensity_PBL))) +
-#   geom_point(aes(color = Metadata_Time), alpha = 0.2) +
-#   scale_color_discrete(name = "Time") +
-#   xlab("DAPI intensity (AU)") +
-#   ylab("CellTracker Green intensity (AU)") +
-#   facet_grid(Metadata_Treatment ~ Metadata_Dose) +
-#   theme_bw()
 
 # PBL/EC in %, ignores position of PBL
 
@@ -53,6 +36,7 @@ ggplot(summary, aes(x = Metadata_Dose, y = img.PBL_EC_ratio.Mean * 100)) +
 ggplot(summary, aes(x = Metadata_Dose, y = img.Count_PBL.Mean)) +
   geom_bar(aes(fill = Metadata_Treatment), position = position_dodge(width = 0.9), stat="identity") +
   geom_errorbar(aes(group = Metadata_Treatment, ymin = img.Count_PBL.Mean - (img.Count_PBL.SD / sqrt(n_images)), ymax = img.Count_PBL.Mean + (img.Count_PBL.SD / sqrt(n_images))), position = position_dodge(width = 0.9), width = 0.1) +
+  geom_text(aes(y = 0, label = n_images), size = 3, vjust = -1) +
   scale_fill_discrete(name = "Treatment") +
   xlab("Dose (Gy)") +
   ylab("Mean number of PBL per image") +

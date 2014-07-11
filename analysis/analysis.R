@@ -7,9 +7,6 @@
 # Read CellProfiler results
 
 if (!exists("img")) img <- read.csv("Image.csv")
-if (!exists("cells")) cells <- read.csv("Cells.csv")
-if (!exists("nuc")) nuc <- read.csv("Nuclei.csv")
-if (!exists("pbl")) pbl <- read.csv("PBL.csv")
 
 # Load sources
 
@@ -28,13 +25,12 @@ classifiers <- c(
 
 # Set columns of interest c('Column', 'dataframe')
 
-col <- rbind(
+columns <- rbind(
   c('Count_Cells', 'img'),
   c('Count_EC', 'img'),
   c('Count_PBL', 'img'),
   c('PBL_EC_ratio', 'img'),
-  c('EC_per_cm2', 'img'),
-  c('Children_PBL_Count', 'cells')
+  c('EC_per_cm2', 'img')
 )
 
 # Variables
@@ -56,24 +52,24 @@ img$EC_per_cm2 <- img$Count_EC / Image_area_cm2
 # Calculate results #
 #####################
 
-summary <- generateList(cells, classifiers)
+summary <- generateList(img, classifiers)
 
 i <- 0
 j <- 0
 k <- 0
 
 for (i in 1:length(summary$n)) {
-  for (k in unique(col[, 2])) { # generate subset dataframes
+  for (k in unique(columns[, 2])) { # generate subset dataframes
     assign(paste0(k, '.subset'), merge(get(k), summary[i, classifiers]))
   }
   
   summary[i, 'n_images'] <- length(img.subset$ImageNumber)
   
-  for (j in 1:length(col[, 1])) {
-    summary[i, paste0(col[j, 2], '.', col[j, 1], '.Sum')] <- sum(get(paste0(col[j, 2], '.subset'))[, col[j, 1]])
-    summary[i, paste0(col[j, 2], '.', col[j, 1], '.Median')] <- median(get(paste0(col[j, 2], '.subset'))[, col[j, 1]])
-    summary[i, paste0(col[j, 2], '.', col[j, 1], '.Mean')] <- mean(get(paste0(col[j, 2], '.subset'))[, col[j, 1]])
-    summary[i, paste0(col[j, 2], '.', col[j, 1], '.SD')] <- sd(get(paste0(col[j, 2], '.subset'))[, col[j, 1]])
+  for (j in 1:length(columns[, 1])) {
+    summary[i, paste0(columns[j, 2], '.', columns[j, 1], '.Sum')] <- sum(get(paste0(columns[j, 2], '.subset'))[, columns[j, 1]])
+    summary[i, paste0(columns[j, 2], '.', columns[j, 1], '.Median')] <- median(get(paste0(columns[j, 2], '.subset'))[, columns[j, 1]])
+    summary[i, paste0(columns[j, 2], '.', columns[j, 1], '.Mean')] <- mean(get(paste0(columns[j, 2], '.subset'))[, columns[j, 1]])
+    summary[i, paste0(columns[j, 2], '.', columns[j, 1], '.SD')] <- sd(get(paste0(columns[j, 2], '.subset'))[, columns[j, 1]])
   }
 }
 
@@ -87,9 +83,8 @@ summary$EC_per_dish.SEM.Percent <- summary$EC_per_dish.SEM / summary$EC_per_dish
 timestamp <- format(Sys.time(), "%Y-%m-%d")
 
 write.csv(img, paste0(timestamp, "_rawdata-img.csv"), row.names = F)
-if (length(cells$Metadata_Dose) < 50000) write.csv(cells, paste0(timestamp, "_rawdata.csv"), row.names = F)
 write.csv(summary, paste0(timestamp, "_results.csv"), row.names = F)
 
 # remove temporary variables
 
-rm(i, j, cells.subset, img.subset)
+rm(i, j, img.subset)
