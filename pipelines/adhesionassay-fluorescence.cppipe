@@ -14,31 +14,13 @@ Metadata:[module_num:2|svn_version:\'Unknown\'|variable_revision_number:4|show_w
     Extract metadata?:Yes
     Metadata data type:Text
     Metadata types:{}
-    Extraction method count:3
+    Extraction method count:1
     Metadata extraction method:Extract from file/folder names
     Metadata source:File name
     Regular expression:(?P<Celltype>.*)-(?P<Time>.*)-(?P<Dose>.*)-(?P<Treatment>.*)-(?P<Replicate>.*)-_(.*)_(.*)
     Regular expression:(?P<Date>\x5B0-9\x5D{4}_\x5B0-9\x5D{2}_\x5B0-9\x5D{2})$
-    Extract metadata from:Images matching a rule
+    Extract metadata from:All images
     Select the filtering criteria:and (file does contain "_0001.tif")
-    Metadata file location:
-    Match file and image metadata:\x5B\x5D
-    Use case insensitive matching?:No
-    Metadata extraction method:Extract from file/folder names
-    Metadata source:File name
-    Regular expression:(?P<Celltype>.*)-(?P<Time>.*)-(?P<Dose>.*)-(?P<Treatment>.*)-(?P<Replicate>.*)-_(.*)_(.*)
-    Regular expression:(?P<Date>\x5B0-9\x5D{4}_\x5B0-9\x5D{2}_\x5B0-9\x5D{2})$
-    Extract metadata from:Images matching a rule
-    Select the filtering criteria:and (file does contain "_0002.tif")
-    Metadata file location:
-    Match file and image metadata:\x5B\x5D
-    Use case insensitive matching?:No
-    Metadata extraction method:Extract from file/folder names
-    Metadata source:File name
-    Regular expression:(?P<Celltype>.*)-(?P<Time>.*)-(?P<Dose>.*)-(?P<Treatment>.*)-(?P<Replicate>.*)-_(.*)_(.*)
-    Regular expression:(?P<Date>\x5B0-9\x5D{4}_\x5B0-9\x5D{2}_\x5B0-9\x5D{2})$
-    Extract metadata from:Images matching a rule
-    Select the filtering criteria:and (file does contain "_0000.tif")
     Metadata file location:
     Match file and image metadata:\x5B\x5D
     Use case insensitive matching?:No
