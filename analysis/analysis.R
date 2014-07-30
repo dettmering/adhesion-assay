@@ -6,8 +6,8 @@
 
 # Read CellProfiler results
 
-if (!exists("img")) img <- read.csv("Image.csv")
-if (!exists("pbl")) pbl <- read.csv("PBL.csv")
+img <- read.csv("Image.csv")
+pbl <- read.csv("PBL.csv")
 
 # Load sources
 
@@ -54,8 +54,8 @@ img$EC_per_cm2 <- img$Count_EC / Image_area_cm2
 # Calculate results #
 #####################
 
-PBL.threshold <- median(pbl$Intensity_IntegratedIntensity_DAPI) - sd(pbl$Intensity_IntegratedIntensity_DAPI)
-pbl$has.nucleus <- pbl$Intensity_IntegratedIntensity_DAPI > PBL.threshold
+PBL.threshold <- (median(log10(pbl$Intensity_MeanIntensity_DAPI)) + (median(log10(pbl$Intensity_MeanIntensity_DAPI)) * 0.15 * 2))
+pbl$has.nucleus <- log10(pbl$Intensity_MeanIntensity_DAPI) > PBL.threshold
 
 summary <- generateList(img, classifiers)
 

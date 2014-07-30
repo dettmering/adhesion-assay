@@ -62,8 +62,7 @@ ggplot(summary, aes(x = Metadata_Dose, y = EC_per_dish.Mean)) +
   facet_grid(. ~ Metadata_Time) +
   theme_bw()
 
-plot(pbl$Intensity_IntegratedIntensity_DAPI)
-abline(h = median(pbl$Intensity_IntegratedIntensity_DAPI), col = "red")
-abline(h = median(pbl$Intensity_IntegratedIntensity_DAPI) - sd(pbl$Intensity_IntegratedIntensity_DAPI), col = "blue")
+plot(log10(pbl$Intensity_MeanIntensity_DAPI))
+abline(h = PBL.threshold, col = "red")
 
 dev.off()
