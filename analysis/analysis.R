@@ -7,6 +7,7 @@
 # Read CellProfiler results
 
 if (!exists("img")) img <- read.csv("Image.csv")
+if (!exists("pbl")) pbl <- read.csv("PBL.csv")
 
 # Load sources
 
@@ -30,7 +31,8 @@ columns <- rbind(
   c('Count_EC', 'img'),
   c('Count_PBL', 'img'),
   c('PBL_EC_ratio', 'img'),
-  c('EC_per_cm2', 'img')
+  c('EC_per_cm2', 'img'),
+  c('has.nucleus', 'pbl')
 )
 
 # Variables
@@ -51,6 +53,9 @@ img$EC_per_cm2 <- img$Count_EC / Image_area_cm2
 #####################
 # Calculate results #
 #####################
+
+PBL.threshold <- median(pbl$Intensity_IntegratedIntensity_DAPI) - sd(pbl$Intensity_IntegratedIntensity_DAPI)
+pbl$has.nucleus <- pbl$Intensity_IntegratedIntensity_DAPI > PBL.threshold
 
 summary <- generateList(img, classifiers)
 
