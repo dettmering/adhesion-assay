@@ -20,24 +20,27 @@ ggplot(img, aes(x = Count_EC, y = Count_PBL)) +
   facet_grid(Metadata_Treatment ~ Metadata_Dose) +
   theme_bw()
 
-# PBL/EC in %, ignores position of PBL
+# PBL/EC in %
 
 ggplot(summary, aes(x = Metadata_Dose, y = img.PBL_EC_ratio.Mean * 100)) +
   geom_bar(aes(fill = Metadata_Treatment), position = position_dodge(width = 0.9), stat="identity") +
   geom_errorbar(aes(group = Metadata_Treatment, ymin = img.PBL_EC_ratio.Mean * 100 - (img.PBL_EC_ratio.SD / sqrt(n_images) * 100), ymax = img.PBL_EC_ratio.Mean * 100 + (img.PBL_EC_ratio.SD / sqrt(n_images) * 100)), position = position_dodge(width = 0.9), width = 0.1) +
+  geom_text(aes(y = 0, label = n_images, group = Metadata_Treatment), size = 3, vjust = -2.5, position = position_dodge(width = 0.9)) +
+  geom_text(aes(y = 0, label = img.Count_PBL.Sum, group = Metadata_Treatment), size = 3, vjust = -1, position = position_dodge(width = 0.9)) +
   scale_fill_discrete(name = "Treatment") +
   xlab("Dose (Gy)") +
   ylab("Mean number of PBL per 100 EC") +
   facet_grid(. ~ Metadata_Time) +
   theme_bw()
 
-# PBL count per image, ignores position
+# PBL count per image
 
 ggplot(summary, aes(x = Metadata_Dose, y = img.Count_PBL.Mean)) +
   geom_bar(aes(fill = Metadata_Treatment), position = position_dodge(width = 0.9), stat="identity") +
   geom_errorbar(aes(group = Metadata_Treatment, ymin = img.Count_PBL.Mean - (img.Count_PBL.SD / sqrt(n_images)), ymax = img.Count_PBL.Mean + (img.Count_PBL.SD / sqrt(n_images))), position = position_dodge(width = 0.9), width = 0.1) +
-  geom_text(aes(y = 0, label = n_images, group = Metadata_Treatment), size = 3, vjust = -1, position = position_dodge(width = 0.9)) +
-  scale_fill_discrete(name = "Treatment") +
+  geom_text(aes(y = 0, label = n_images, group = Metadata_Treatment), size = 3, vjust = -2.5, position = position_dodge(width = 0.9)) +
+  geom_text(aes(y = 0, label = img.Count_PBL.Sum, group = Metadata_Treatment), size = 3, vjust = -1, position = position_dodge(width = 0.9)) +
+  scale_fill_discrete(name = "Treatment") +  scale_fill_discrete(name = "Treatment") +
   xlab("Dose (Gy)") +
   ylab("Mean number of PBL per image") +
   facet_grid(. ~ Metadata_Time) +
@@ -56,7 +59,8 @@ ggplot(img, aes(x = Metadata_Dose, y = Count_PBL)) +
 ggplot(summary, aes(x = Metadata_Dose, y = EC_per_dish.Mean)) +
   geom_bar(aes(fill = Metadata_Treatment), position = position_dodge(width = 0.9), stat="identity") +
   geom_errorbar(aes(group = Metadata_Treatment, ymin = EC_per_dish.Mean - EC_per_dish.SEM, ymax = EC_per_dish.Mean + EC_per_dish.SEM), position = position_dodge(width = 0.9), width = 0.1) +
-  scale_fill_discrete(name = "Treatment") +
+  geom_text(aes(y = 0, label = n_images, group = Metadata_Treatment), size = 3, vjust = -2.5, position = position_dodge(width = 0.9)) +
+  geom_text(aes(y = 0, label = img.Count_EC.Sum, group = Metadata_Treatment), size = 3, vjust = -1, position = position_dodge(width = 0.9)) +  scale_fill_discrete(name = "Treatment") +
   xlab("Dose (Gy)") +
   ylab("Mean number of EC per petri dish") +
   facet_grid(. ~ Metadata_Time) +
