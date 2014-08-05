@@ -78,6 +78,8 @@ for (i in 1:length(summary$n)) {
   }
 }
 
+summary$PBL_with_nuclei.Percent <- summary$pbl.has.nucleus.Sum / summary$img.Count_PBL.Sum * 100
+
 summary$EC_per_dish.Mean <- summary$img.EC_per_cm2.Mean * Petridish_area_cm2
 summary$EC_per_dish.SD <- summary$img.EC_per_cm2.SD * Petridish_area_cm2
 summary$EC_per_dish.SEM <- summary$EC_per_dish.SD / sqrt(summary$n_images)
