@@ -13,12 +13,12 @@ pdf(paste0(format(Sys.time(), "%Y-%m-%d"), "_results.pdf"), width = 8.27, height
 # EC count vs. PBL count for each image
 
 ggplot(img, aes(x = Count_EC, y = Count_PBL)) +
+  stat_smooth(method = "lm") +
   geom_point(aes(color = Metadata_Time)) +
   scale_color_discrete(name = "Time") +
   xlab("EC Count") +
   ylab("PBL Count") +
-  facet_grid(Metadata_Treatment ~ Metadata_Dose) +
-  theme_bw()
+  facet_grid(Metadata_Treatment ~ Metadata_Dose)
 
 # PBL/EC in %
 
