@@ -40,7 +40,7 @@ ggplot(summary, aes(x = Metadata_Dose, y = img.Count_PBL.Mean)) +
   geom_errorbar(aes(group = Metadata_Treatment, ymin = img.Count_PBL.Mean - (img.Count_PBL.SD / sqrt(n_images)), ymax = img.Count_PBL.Mean + (img.Count_PBL.SD / sqrt(n_images))), position = position_dodge(width = 0.9), width = 0.1) +
   geom_text(aes(y = 0, label = n_images, group = Metadata_Treatment), size = 3, vjust = -2.5, position = position_dodge(width = 0.9)) +
   geom_text(aes(y = 0, label = img.Count_PBL.Sum, group = Metadata_Treatment), size = 3, vjust = -1, position = position_dodge(width = 0.9)) +
-  scale_fill_discrete(name = "Treatment") +  scale_fill_discrete(name = "Treatment") +
+  scale_fill_discrete(name = "Treatment") +
   xlab("Dose (Gy)") +
   ylab("Mean number of PBL per image") +
   facet_grid(. ~ Metadata_Time) +
