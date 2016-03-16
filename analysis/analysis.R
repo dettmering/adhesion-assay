@@ -54,6 +54,8 @@ img$EC_per_cm2 <- img$Count_EC / Image_area_cm2
 # Calculate results #
 #####################
 
+# We assume a CV of 15%
+
 PBL.threshold <- (median(log10(pbl$Intensity_MeanIntensity_DAPI)) + (median(log10(pbl$Intensity_MeanIntensity_DAPI)) * 0.15 * 2))
 pbl$has.nucleus <- log10(pbl$Intensity_MeanIntensity_DAPI) > PBL.threshold
 
