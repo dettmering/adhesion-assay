@@ -37,14 +37,20 @@ columns <- rbind(
 
 # Variables
 
+# These values are for a Leica TCS SPE, 10x objective
+
 width.um <- 1270.69
 height.um <- 949.13
 width.px <- 1392
 height.px <- 1040
 
+# Calculations on the image area etc.
+
 Image_area_cm2 <- width.um * height.um / 10^8
 Pixel_area_um2 <- (width.um * height.um) / (width.px * height.px)
 Petridish_area_cm2 <- 9.621128 # (3.5/2)^2 * pi
+
+# Calculations for whole image
 
 img$Count_EC <- img$Count_Cells - img$Count_PBL
 img$PBL_EC_ratio <- img$Count_PBL / img$Count_EC
@@ -54,16 +60,20 @@ img$EC_per_cm2 <- img$Count_EC / Image_area_cm2
 # Calculate results #
 #####################
 
-# We assume a CV of 15%
+# We assume a CV of 15% for DAPI intensity in order to determine if a detected PBL has a nucleus
 
 PBL.threshold <- (median(log10(pbl$Intensity_MeanIntensity_DAPI)) + (median(log10(pbl$Intensity_MeanIntensity_DAPI)) * 0.15 * 2))
 pbl$has.nucleus <- log10(pbl$Intensity_MeanIntensity_DAPI) > PBL.threshold
+
+# Generate grouping list
 
 summary <- generateList(img, classifiers)
 
 i <- 0
 j <- 0
 k <- 0
+
+# This is complicated, but needed to be flexible. This calculates summary statistics for certain columns in certain data frames, given in the 'columns' list.
 
 for (i in 1:length(summary$n)) {
   for (k in unique(columns[, 2])) { # generate subset dataframes
